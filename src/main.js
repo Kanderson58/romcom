@@ -4,8 +4,15 @@ var coverLocation = document.querySelector(".cover-image")
 var titleLocation = document.querySelector(".cover-title")
 var firstTagLocation = document.querySelector(".tagline-1")
 var secondTagLocation = document.querySelector(".tagline-2")
+var viewFormPage = document.querySelector(".form-view")
+var viewHome = document.querySelector(".home-view")
 
+var homeButton = document.querySelector(".home-button")
 var randomCoverButton = document.querySelector(".random-cover-button")
+var saveCoverButton = document.querySelector(".save-cover-button")
+var viewSavedCoverButton = document.querySelector(".view-saved-button")
+var makeNewCoverButton = document.querySelector(".make-new-button")
+
 
 // We've provided a few variables below
 var savedCovers = [
@@ -19,6 +26,7 @@ var currentCover;
 
 window.addEventListener("load", getRandomCover)
 randomCoverButton.addEventListener("click", getRandomCover)
+makeNewCoverButton.addEventListener("click", showForm)
 
 // Create your event handlers and other functions here 👇
 
@@ -41,7 +49,14 @@ function getRandomCover(){
   currentCover = new Cover(randomCoverImage, randomCoverTitle, randomCoverDescriptor1, randomCoverDescriptor2)
 }
 
-
+function showForm() {
+  console.log("howwwdy")
+  viewFormPage.classList.remove("hidden")
+  viewHome.classList.add("hidden")
+  randomCoverButton.classList.add("hidden")
+  saveCoverButton.classList.add("hidden")
+  homeButton.classList.remove("hidden")
+}
 // We've provided one function to get you started
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
