@@ -6,6 +6,7 @@ var firstTagLocation = document.querySelector(".tagline-1")
 var secondTagLocation = document.querySelector(".tagline-2")
 var viewFormPage = document.querySelector(".form-view")
 var viewHome = document.querySelector(".home-view")
+var viewSaved = document.querySelector(".saved-view")
 
 var homeButton = document.querySelector(".home-button")
 var randomCoverButton = document.querySelector(".random-cover-button")
@@ -26,14 +27,21 @@ var currentCover;
 window.addEventListener("load", getRandomCover)
 randomCoverButton.addEventListener("click", getRandomCover)
 makeNewCoverButton.addEventListener("click", showForm)
+viewSavedCoverButton.addEventListener("click", showSavedCovers)
+homeButton.addEventListener("click", showHome)
 
 // Create your event handlers and other functions here 👇
 
 function getRandomCover(){
-  var randomCoverImage = covers[getRandomIndex(covers)];
-  var randomCoverTitle = titles[getRandomIndex(titles)];
-  var randomCoverDescriptor1 = descriptors[getRandomIndex(descriptors)];
-  var randomCoverDescriptor2 = descriptors[getRandomIndex(descriptors)];
+  var randomCoversIndex = getRandomIndex(covers);
+  var randomTitlesIndex = getRandomIndex(titles);
+  var randomDescriptorsIndex1 = getRandomIndex(descriptors);
+  var randomDescriptorsIndex2 = getRandomIndex(descriptors);
+
+  var randomCoverImage = covers[randomCoversIndex]
+  var randomCoverTitle = titles[randomTitlesIndex]
+  var randomCoverDescriptor1 = descriptors[randomDescriptorsIndex1]
+  var randomCoverDescriptor2 = descriptors[randomDescriptorsIndex2]
 
   coverLocation.src = randomCoverImage
   titleLocation.innerText = randomCoverTitle
@@ -46,10 +54,30 @@ function getRandomCover(){
 function showForm() {
   viewFormPage.classList.remove("hidden")
   viewHome.classList.add("hidden")
+  viewSaved.classList.add("hidden")
   randomCoverButton.classList.add("hidden")
   saveCoverButton.classList.add("hidden")
   homeButton.classList.remove("hidden")
 }
+
+function showSavedCovers(){
+  viewFormPage.classList.add("hidden")
+  viewHome.classList.add("hidden")
+  viewSaved.classList.remove("hidden")
+  randomCoverButton.classList.add("hidden")
+  saveCoverButton.classList.add("hidden")
+  homeButton.classList.remove("hidden")
+}
+
+function showHome(){
+  viewFormPage.classList.add("hidden")
+  viewHome.classList.remove("hidden")
+  viewSaved.classList.add("hidden")
+  randomCoverButton.classList.remove("hidden")
+  saveCoverButton.classList.remove("hidden")
+  homeButton.classList.add("hidden")
+}
+
 // We've provided one function to get you started
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
