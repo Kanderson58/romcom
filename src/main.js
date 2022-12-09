@@ -35,6 +35,7 @@ makeNewCoverButton.addEventListener("click", showForm)
 viewSavedCoverButton.addEventListener("click", showSavedCovers)
 homeButton.addEventListener("click", showHome)
 createNewCoverButton.addEventListener("click", storeBookCoverUserInfo)
+saveCoverButton.addEventListener("click", addToSavedCovers)
 
 // Create your event handlers and other functions here 👇
 
@@ -85,7 +86,6 @@ function storeBookCoverUserInfo(event) {
   titles.push(inputUserTitle.value)
   descriptors.push(inputUserDescriptor1.value)
   descriptors.push(inputUserDescriptor2.value)
-  // currentCover = new Cover(inputUserCover.value, inputUserTitle.value, inputUserDescriptor1.value, inputUserDescriptor2.value)
   showHome()
   showCreatedCover(inputUserCover.value, inputUserTitle.value, inputUserDescriptor1.value, inputUserDescriptor2.value)
 }
@@ -97,6 +97,17 @@ function showCreatedCover(userImage, userTitle, userDesc1, userDesc2) {
     secondTagLocation.innerText = userDesc2
 }
 
+function addToSavedCovers() {
+  var saveNewCover = new Cover(inputUserCover.value, inputUserTitle.value, inputUserDescriptor1.value, inputUserDescriptor2.value)
+  savedCovers.push(saveNewCover)
+  console.log(savedCovers)
+}
+
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
+
+// When a user clicks the “Save Cover” button, the current cover will be added to the savedCovers array
+// If a user clicks the “Save Cover” more than once on a single cover, it will still only be saved once (no duplicates) - iterate through with for statement, check if any index positions match the current one and do not push if true
+// When a user clicks the “View Saved Covers” button, we should see the saved covers section - iteration plus HTML code in javascript plus interpolation - take the home page HTML that displays a cover, iterate through saved array, display each iteration in the saved page with interpolated data to individualize each displayed cover
+// All the covers in the savedCovers array should be displayed in the saved covers section
