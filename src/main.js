@@ -33,15 +33,10 @@ homeButton.addEventListener("click", showHome)
 // Create your event handlers and other functions here 👇
 
 function getRandomCover(){
-  var randomCoversIndex = getRandomIndex(covers);
-  var randomTitlesIndex = getRandomIndex(titles);
-  var randomDescriptorsIndex1 = getRandomIndex(descriptors);
-  var randomDescriptorsIndex2 = getRandomIndex(descriptors);
-
-  var randomCoverImage = covers[randomCoversIndex]
-  var randomCoverTitle = titles[randomTitlesIndex]
-  var randomCoverDescriptor1 = descriptors[randomDescriptorsIndex1]
-  var randomCoverDescriptor2 = descriptors[randomDescriptorsIndex2]
+  var randomCoverImage = covers[getRandomIndex(covers)];
+  var randomCoverTitle = titles[getRandomIndex(titles)];
+  var randomCoverDescriptor1 = descriptors[getRandomIndex(descriptors)];
+  var randomCoverDescriptor2 = descriptors[getRandomIndex(descriptors)];
 
   coverLocation.src = randomCoverImage
   titleLocation.innerText = randomCoverTitle
