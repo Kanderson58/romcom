@@ -13,7 +13,12 @@ var randomCoverButton = document.querySelector(".random-cover-button")
 var saveCoverButton = document.querySelector(".save-cover-button")
 var viewSavedCoverButton = document.querySelector(".view-saved-button")
 var makeNewCoverButton = document.querySelector(".make-new-button")
+var createNewCoverButton = document.querySelector(".create-new-book-button")
 
+var inputUserCover = document.querySelector(".user-cover")
+var inputUserTitle = document.querySelector(".user-title")
+var inputUserDescriptor1 = document.querySelector(".user-desc1")
+var inputUserDescriptor2 = document.querySelector(".user-desc2")
 
 // We've provided a few variables below
 var savedCovers = [
@@ -22,7 +27,6 @@ var savedCovers = [
 
 var currentCover;
 
-
 // Add your event listeners here 👇
 
 window.addEventListener("load", getRandomCover)
@@ -30,14 +34,15 @@ randomCoverButton.addEventListener("click", getRandomCover)
 makeNewCoverButton.addEventListener("click", showForm)
 viewSavedCoverButton.addEventListener("click", showSavedCovers)
 homeButton.addEventListener("click", showHome)
+createNewCoverButton.addEventListener("click", storeBookCoverUserInfo)
 
 // Create your event handlers and other functions here 👇
 
 function getRandomCover(){
-  var randomCoverImage = covers[getRandomIndex(covers)]
-  var randomCoverTitle = titles[getRandomIndex(titles)]
-  var randomCoverDescriptor1 = descriptors[getRandomIndex(descriptors)]
-  var randomCoverDescriptor2 = descriptors[getRandomIndex(descriptors)]
+  var randomCoverImage = covers[getRandomIndex(covers)];
+  var randomCoverTitle = titles[getRandomIndex(titles)];
+  var randomCoverDescriptor1 = descriptors[getRandomIndex(descriptors)];
+  var randomCoverDescriptor2 = descriptors[getRandomIndex(descriptors)];
 
   coverLocation.src = randomCoverImage
   titleLocation.innerText = randomCoverTitle
@@ -74,9 +79,24 @@ function showHome(){
   homeButton.classList.add("hidden")
 }
 
-// We've provided one function to get you started
+function storeBookCoverUserInfo(event) {
+  event.preventDefault()
+  covers.push(inputUserCover.value)
+  titles.push(inputUserTitle.value)
+  descriptors.push(inputUserDescriptor1.value)
+  descriptors.push(inputUserDescriptor2.value)
+  // currentCover = new Cover(inputUserCover.value, inputUserTitle.value, inputUserDescriptor1.value, inputUserDescriptor2.value)
+  showHome()
+  showCreatedCover(inputUserCover.value, inputUserTitle.value, inputUserDescriptor1.value, inputUserDescriptor2.value)
+}
+
+function showCreatedCover(userImage, userTitle, userDesc1, userDesc2) {
+    coverLocation.src = userImage
+    titleLocation.innerText = userTitle
+    firstTagLocation.innerText = userDesc1
+    secondTagLocation.innerText = userDesc2
+}
+
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
-
-
