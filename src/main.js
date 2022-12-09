@@ -7,6 +7,8 @@ var secondTagLocation = document.querySelector(".tagline-2")
 var viewFormPage = document.querySelector(".form-view")
 var viewHome = document.querySelector(".home-view")
 var viewSaved = document.querySelector(".saved-view")
+var savedCoversSection = document.querySelector(".saved-covers-section")
+
 
 var homeButton = document.querySelector(".home-button")
 var randomCoverButton = document.querySelector(".random-cover-button")
@@ -67,6 +69,7 @@ function showSavedCovers(){
   randomCoverButton.classList.add("hidden")
   saveCoverButton.classList.add("hidden")
   homeButton.classList.remove("hidden")
+  displaySavedCovers()
 }
 
 function showHome(){
@@ -105,11 +108,20 @@ function addToSavedCovers() {
   return savedCovers.push(currentCover)
 }
 
+function displaySavedCovers(){
+  for (var i = 0; i < savedCovers.length; i++){
+    savedCoversSection.innerHTML +=    
+    `<div class="mini-cover">
+    <img class="cover-image" src="${savedCovers[i].cover}">
+    <h2 class="cover-title">${savedCovers[i].title}</h2>
+    <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+    </div>`
+  }
+}
+
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-// When a user clicks the “Save Cover” button, the current cover will be added to the savedCovers array
-// If a user clicks the “Save Cover” more than once on a single cover, it will still only be saved once (no duplicates) - iterate through with for statement, check if any index positions match the current one and do not push if true
 // When a user clicks the “View Saved Covers” button, we should see the saved covers section - iteration plus HTML code in javascript plus interpolation - take the home page HTML that displays a cover, iterate through saved array, display each iteration in the saved page with interpolated data to individualize each displayed cover
 // All the covers in the savedCovers array should be displayed in the saved covers section
