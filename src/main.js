@@ -44,12 +44,10 @@ function getRandomCover(){
   var randomCoverTitle = titles[getRandomIndex(titles)];
   var randomCoverDescriptor1 = descriptors[getRandomIndex(descriptors)];
   var randomCoverDescriptor2 = descriptors[getRandomIndex(descriptors)];
-
   coverLocation.src = randomCoverImage
   titleLocation.innerText = randomCoverTitle
   firstTagLocation.innerText = randomCoverDescriptor1
   secondTagLocation.innerText = randomCoverDescriptor2
-
   currentCover = new Cover(randomCoverImage, randomCoverTitle, randomCoverDescriptor1, randomCoverDescriptor2)
 }
 
@@ -86,6 +84,7 @@ function storeBookCoverUserInfo(event) {
   titles.push(inputUserTitle.value)
   descriptors.push(inputUserDescriptor1.value)
   descriptors.push(inputUserDescriptor2.value)
+  currentCover = new Cover(inputUserCover.value, inputUserTitle.value, inputUserDescriptor1.value, inputUserDescriptor2.value)
   showHome()
   showCreatedCover(inputUserCover.value, inputUserTitle.value, inputUserDescriptor1.value, inputUserDescriptor2.value)
 }
@@ -98,9 +97,12 @@ function showCreatedCover(userImage, userTitle, userDesc1, userDesc2) {
 }
 
 function addToSavedCovers() {
-  var saveNewCover = new Cover(inputUserCover.value, inputUserTitle.value, inputUserDescriptor1.value, inputUserDescriptor2.value)
-  savedCovers.push(saveNewCover)
-  console.log(savedCovers)
+  for (var i = 0; i < savedCovers.length; i++){
+    if(savedCovers[i].cover === currentCover.cover && savedCovers[i].title === currentCover.title && savedCovers[i].tagline1 === currentCover.tagline1 && savedCovers[i].tagline2 === currentCover.tagline2){
+      return
+    }
+  }
+  return savedCovers.push(currentCover)
 }
 
 function getRandomIndex(array) {
