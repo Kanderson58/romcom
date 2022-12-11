@@ -30,14 +30,13 @@ var currentCover;
 // Add your event listeners here 👇
 
 window.addEventListener("load", getRandomCover)
+window.addEventListener("dblclick", deleteBook)
 randomCoverButton.addEventListener("click", getRandomCover)
 makeNewCoverButton.addEventListener("click", showForm)
 viewSavedCoverButton.addEventListener("click", showSavedCovers)
 homeButton.addEventListener("click", showHome)
 createNewCoverButton.addEventListener("click", storeBookCoverUserInfo)
 saveCoverButton.addEventListener("click", addToSavedCovers)
-
-// window.addEventListener("dblclick", deleteBook)
 
 // Create your event handlers and other functions here 👇
 
@@ -108,35 +107,22 @@ function addToSavedCovers() {
   return savedCovers.push(currentCover)
 }
 
-var currentDisplayedCover;
-
-function displaySavedCovers(e){
+function displaySavedCovers(){
+  savedCoversSection.innerHTML = " "
   for (var i = 0; i < savedCovers.length; i++){
     savedCoversSection.innerHTML +=    
-    `<div class="mini-cover" id="cover-${[i]}">
+    `<div class="mini-cover" id="${[i]}">
     <img class="cover-image" src="${savedCovers[i].cover}">
     <h2 class="cover-title">${savedCovers[i].title}</h2>
     <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
     </div>`
-  } for (var j = 0; j < savedCovers.length; j++) {
-    var savedCoverLocation = document.getElementById(`cover-${[j]}`)
-    savedCoverLocation.addEventListener("dblclick", function() {deleteBook(savedCovers[j])})
   } 
-  // for (var j = 0; j < savedCovers.length; j++) {
-  // var savedCoverLocation = document.getElementById(`cover-${[j]}`)
-  // savedCoverLocation.addEventListener("dblclick", function(){deleteBook([i])})
-  // } for (var f = 0; f < savedCovers.length; f++) {
-  //   currentDisplayedCover = savedCovers[f]
-  // }
-  // }
-// }
 }
 
-function deleteBook(index) {
-  savedCovers.splice(savedCovers[index], 1)
-  console.log(savedCovers)
-}
-
+function deleteBook(event) {
+    savedCovers.splice(event.target.parentNode.id, 1)
+    displaySavedCovers()
+  }
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
