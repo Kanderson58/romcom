@@ -9,7 +9,6 @@ var viewHome = document.querySelector(".home-view")
 var viewSaved = document.querySelector(".saved-view")
 var savedCoversSection = document.querySelector(".saved-covers-section")
 
-
 var homeButton = document.querySelector(".home-button")
 var randomCoverButton = document.querySelector(".random-cover-button")
 var saveCoverButton = document.querySelector(".save-cover-button")
@@ -28,7 +27,6 @@ var savedCovers = [
 ];
 
 var currentCover;
-
 // Add your event listeners here 👇
 
 window.addEventListener("load", getRandomCover)
@@ -38,6 +36,8 @@ viewSavedCoverButton.addEventListener("click", showSavedCovers)
 homeButton.addEventListener("click", showHome)
 createNewCoverButton.addEventListener("click", storeBookCoverUserInfo)
 saveCoverButton.addEventListener("click", addToSavedCovers)
+
+// window.addEventListener("dblclick", deleteBook)
 
 // Create your event handlers and other functions here 👇
 
@@ -108,20 +108,36 @@ function addToSavedCovers() {
   return savedCovers.push(currentCover)
 }
 
-function displaySavedCovers(){
+var currentDisplayedCover;
+
+function displaySavedCovers(e){
   for (var i = 0; i < savedCovers.length; i++){
     savedCoversSection.innerHTML +=    
-    `<div class="mini-cover">
+    `<div class="mini-cover" id="cover-${[i]}">
     <img class="cover-image" src="${savedCovers[i].cover}">
     <h2 class="cover-title">${savedCovers[i].title}</h2>
     <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
     </div>`
-  }
+  } for (var j = 0; j < savedCovers.length; j++) {
+    var savedCoverLocation = document.getElementById(`cover-${[j]}`)
+    savedCoverLocation.addEventListener("dblclick", function() {deleteBook(savedCovers[j])})
+  } 
+  // for (var j = 0; j < savedCovers.length; j++) {
+  // var savedCoverLocation = document.getElementById(`cover-${[j]}`)
+  // savedCoverLocation.addEventListener("dblclick", function(){deleteBook([i])})
+  // } for (var f = 0; f < savedCovers.length; f++) {
+  //   currentDisplayedCover = savedCovers[f]
+  // }
+  // }
+// }
 }
+
+function deleteBook(index) {
+  savedCovers.splice(savedCovers[index], 1)
+  console.log(savedCovers)
+}
+
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
-
-// When a user clicks the “View Saved Covers” button, we should see the saved covers section - iteration plus HTML code in javascript plus interpolation - take the home page HTML that displays a cover, iterate through saved array, display each iteration in the saved page with interpolated data to individualize each displayed cover
-// All the covers in the savedCovers array should be displayed in the saved covers section
