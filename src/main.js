@@ -27,8 +27,8 @@ var savedCovers = [
 ];
 
 var currentCover;
-// Add your event listeners here 👇
 
+// Add your event listeners here 👇
 window.addEventListener("load", getRandomCover)
 window.addEventListener("dblclick", deleteBook)
 randomCoverButton.addEventListener("click", getRandomCover)
@@ -39,7 +39,6 @@ createNewCoverButton.addEventListener("click", storeBookCoverUserInfo)
 saveCoverButton.addEventListener("click", addToSavedCovers)
 
 // Create your event handlers and other functions here 👇
-
 function getRandomCover(){
   var randomCoverImage = covers[getRandomIndex(covers)];
   var randomCoverTitle = titles[getRandomIndex(titles)];
@@ -120,9 +119,9 @@ function displaySavedCovers(){
 }
 
 function deleteBook(event) {
-    savedCovers.splice(event.target.parentNode.id, 1)
-    displaySavedCovers()
-  }
+  savedCovers.splice(event.target.parentNode.id, 1)
+  displaySavedCovers()
+}
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
